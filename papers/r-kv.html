@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>R-KV — Ke Wan</title>
+  <meta name="description" content="R-KV: Redundancy-aware KV Cache Compression for Reasoning Models (NeurIPS 2025)." />
+
+  <!-- Scholar-friendly citation metadata (one paper per page) -->
+  <meta name="citation_title" content="R-KV: Redundancy-aware KV Cache Compression for Reasoning Models" />
+
+  <!-- Repeat citation_author once per author -->
+  <meta name="citation_author" content="Zefan Cai" />
+  <meta name="citation_author" content="Wen Xiao" />
+  <meta name="citation_author" content="Hanshi Sun" />
+  <meta name="citation_author" content="Cheng Luo" />
+  <meta name="citation_author" content="Yikai Zhang" />
+  <meta name="citation_author" content="Ke Wan" />
+  <meta name="citation_author" content="Yucheng Li" />
+  <meta name="citation_author" content="Yeyang Zhou" />
+  <meta name="citation_author" content="Li-Wen Chang" />
+  <meta name="citation_author" content="Jiuxiang Gu" />
+  <meta name="citation_author" content="Zhen Dong" />
+  <meta name="citation_author" content="Anima Anandkumar" />
+  <meta name="citation_author" content="Abedelkadir Asi" />
+  <meta name="citation_author" content="Junjie Hu" />
+
+  <!-- Use the most appropriate date you want the page to represent.
+       If you prefer the arXiv date, use 2025/05/30. If you prefer proceedings date, use the official NeurIPS proceedings date. -->
+  <meta name="citation_publication_date" content="2025/05/30" />
+
+  <!-- Strongly recommended: point to a PDF that is stable and publicly accessible -->
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2505.24133.pdf" />
+  <meta name="citation_arxiv_id" content="2505.24133" />
+
+  <!-- Optional extras (safe to include) -->
+  <!-- <meta name="citation_conference_title" content="Advances in Neural Information Processing Systems (NeurIPS 2025)" /> -->
+  <meta name="citation_technical_report_institution" content="arXiv">
+  <meta name="citation_technical_report_number" content="2505.24133">
+  <link rel="canonical" href="https://wanke1997.github.io/papers/r-kv.html" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#121212;
+      --muted:#5b5b5b;
+      --line:#e6e6e6;
+      --accent:#9a6b2f;
+      --max: 860px;
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 42px 18px 70px;
+    }
+    header{
+      margin-bottom: 20px;
+    }
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .crumb a{
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .crumb a:hover{ text-decoration: underline; }
+    .tag{
+      font-size: 12px;
+      color: #fff;
+      background: var(--accent);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .authors{
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .venue{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
+    hr{
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 22px 0;
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      color: var(--accent);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .links a{
+      color: var(--accent);
+      font-weight: 650;
+    }
+    .pipe{ color:#c9b39a; }
+    .muted{ color: var(--muted); }
+    .abstract{
+      margin: 0;
+      font-size: 15px;
+    }
+    .bib{
+      margin-top: 10px;
+      background: #fafafa;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    footer{
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Citing papers */
+    .citing{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      max-width: 92ch;
+    }
+    details{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      background: #fff;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .details-meta{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .cite-item{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      color: var(--fg);
+      font-size: 14px;
+    }
+    .cite-item .cite-title{ font-weight: 700; }
+    .cite-item .cite-links{
+      margin-top: 4px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .cite-item .cite-links a{
+      color: var(--accent);
+      font-weight: 650;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="topbar">
+        <div class="crumb">
+          <a href="../index.html">← Back to homepage</a>
+        </div>
+        <div class="tag">NeurIPS 2025</div>
+      </div>
+
+      <h1>R-KV: Redundancy-aware KV Cache Compression for Reasoning Models</h1>
+      <p class="authors">
+        Zefan Cai, Wen Xiao, Hanshi Sun, Cheng Luo, Yikai Zhang, Ke Wan, Yucheng Li, Yeyang Zhou, Li-Wen Chang, Jiuxiang Gu,
+        Zhen Dong, Anima Anandkumar, Abedelkadir Asi, Junjie Hu
+      </p>
+      <p class="venue">Advances in Neural Information Processing Systems (NeurIPS 2025)</p>
+
+      <div class="links" aria-label="Links">
+        <a href="https://arxiv.org/abs/2505.24133" target="_blank" rel="noopener">arXiv</a>
+        <span class="pipe">|</span>
+        <a href="../assets/papers/22820_R_KV_Redundancy_aware_KV.pdf" target="_blank" rel="noopener">PDF</a>
+        <span class="pipe">|</span>
+        <a href="https://openreview.net/pdf?id=2jwAjomEDB" target="_blank" rel="noopener">OpenReview</a>
+        <span class="pipe">|</span>
+        <a href="https://github.com/Zefan-Cai/R-KV" target="_blank" rel="noopener">Code</a>
+        <span class="pipe">|</span>
+        <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/120110" target="_blank" rel="noopener">Poster</a>
+      </div>
+    </header>
+
+    <hr />
+
+    <main class="card">
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">Abstract</h2>
+      <p class="abstract">
+        <!-- Replace this with your real abstract (recommended). -->
+        Reasoning models have demonstrated impressive performance in self-reflection and chain-of-thought reasoning. However, they often produce excessively long outputs, leading to prohibitively large key-value (KV) caches during inference. While chain-of-thought inference significantly improves performance on complex reasoning tasks, it can also lead to reasoning failures when deployed with existing KV cache compression approaches. To address this, we propose Redundancy-aware KV Cache Compression for Reasoning models (R-KV), a novel method specifically targeting redundant tokens in reasoning models. Our method preserves nearly 100% of the full KV cache performance using only 10% of the KV cache, substantially outperforming existing KV cache baselines, which reach only 60% of the performance. Remarkably, R-KV even achieves 105% of full KV cache performance with 16% of the KV cache. This KV-cache reduction also leads to a 90% memory saving and a 6.6X throughput over standard chain-of-thought reasoning inference. Experimental results show that R-KV consistently outperforms existing KV cache compression baselines across two mathematical reasoning datasets. 
+      </p>
+
+      <hr />
+
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">BibTeX</h2>
+      <div class="bib">
+            @inproceedings{
+            cai2025rkv,
+            title={R-{KV}: Redundancy-aware {KV} Cache Compression for Reasoning Models},
+            author={Zefan Cai and Wen Xiao and Hanshi Sun and Cheng Luo and Yikai Zhang and Ke Wan and Yucheng Li and Yeyang Zhou and Li-Wen Chang and Jiuxiang Gu and Zhen Dong and Anima Anandkumar and Abedelkadir Asi and Junjie Hu},
+            booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+            year={2025},
+            url={https://openreview.net/forum?id=2jwAjomEDB}
+            }
+      </div>
+
+      <!-- <p class="muted" style="margin:10px 0 0; font-size:13px;">
+        Tip: keep the PDF link stable. If you host a local copy (e.g., <span style="font-family:var(--mono)">/assets/papers/</span>),
+        ensure it is publicly accessible and returns <span style="font-family:var(--mono)">200</span> with
+        <span style="font-family:var(--mono)">content-type: application/pdf</span>.
+      </p> -->
+    </main>
+
+    <hr />
+
+    <!-- SECTION: Citing papers (put this first, per your request) -->
+
+    <section class="section" id="citing">
+    <h2>Papers Citing This Work</h2>
+    <p class="muted">
+        Below is a manually curated list of publications that cite this paper. This list may be incomplete due to indexing
+        delays or metadata issues across different sources.
+    </p>
+
+    <div class="citing">
+
+        <div class="paper-block"
+        style="border:1px solid var(--line); border-radius: var(--radius); padding:14px; background:#fff;">
+
+        <!-- ===================== Citing papers ===================== -->
+
+        <div class="cite-item">
+            <div class="cite-title">
+            Sparse-RL: Breaking the Memory Wall in LLM Reinforcement Learning via Stable Sparse Rollouts
+            </div>
+            <div class="muted">
+            Sijia Luo, Xiaokang Zhang, Yuxuan Hu, Bohan Zhang, Ke Wang, Jinbo Su, Mengshu Sun, Lei Liang, Jing Zhang · arXiv · 2026
+            </div>
+            <div class="cite-links">
+            <a href="https://arxiv.org/pdf/2601.10079v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+            <span class="pipe">|</span>
+            <a href="../assets/papers/2601.10079v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2601.10079v1" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            SkipKV: Selective Skipping of KV Generation and Storage for Efficient Inference with Large Reasoning Models
+            </div>
+            <div class="muted">
+            Jiayi Tian, Seyedarmin Azizi, Yequan Zhao, Erfan Baghaei Potraghloo, Sean McPherson,
+            Sharath Nittur Sridhar, Zhengyang Wang, Zheng Zhang, Massoud Pedram, Souvik Kundu · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2512.07993v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2512.07993v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2512.07993" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            G-KV: Decoding-Time KV Cache Eviction with Global Attention
+            </div>
+            <div class="muted">
+            Mengqi Liao, Lu Wang, Chaoyun Zhang, Zekai Shen, Xiaowei Mao, Si Qin,
+            Qingwei Lin, Saravan Rajmohan, Dongmei Zhang, Huaiyu Wan · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2512.00504v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2512.00504v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2512.00504" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            ThinKV: Thought-Adaptive KV Cache Compression for Efficient Reasoning Models
+            </div>
+            <div class="muted">
+            Akshat Ramachandran, Marina Neseem, Charbel Sakr,
+            Rangharajan Venkatesan, Brucek Khailany, Tushar Krishna · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2510.01290v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2510.01290v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2510.01290" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            Cache What Lasts: Token Retention for Memory-Bounded KV Cache in LLMs
+            </div>
+            <div class="muted">
+            Ngoc Bui, Shubham Sharma, Simran Lamba,
+            Saumitra Mishra, Rex Ying · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2512.03324v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2512.03324v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2512.03324" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            Sentence-Anchored Gist Compression for Long-Context LLMs
+            </div>
+            <div class="muted">
+            Dmitrii Tarasov, Elizaveta Goncharova, Kuznetsov Andrey · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2511.08128v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2511.08128v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2511.08128" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            DELTA: Dynamic Layer-Aware Token Attention for Efficient Long-Context Reasoning
+            </div>
+            <div class="muted">
+            Hossein Entezari Zarch, Lei Gao, Chaoyi Jiang, Murali Annavarm · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2510.09883v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2510.09883v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2510.09883" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            On the Existence and Behaviour of Secondary Attention Sinks
+            </div>
+            <div class="muted">
+            Jeffrey T.H. Wong, Cheng Zhang, Louis Mahon,
+            Wayne Luk, Anton Isopoussu, Yiren Zhao · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2512.22213v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2512.22213v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2512.22213" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            SparK: Query-Aware Unstructured Sparsity with Recoverable KV Cache Channel Pruning
+            </div>
+            <div class="muted">
+            Huanxuan Liao, Yixing Xu, Shizhu He, Guanchen Li,
+            Xuanwu Yin, Dong Li, Emad Barsoum, Jun Zhao, Kang Liu · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2508.15212v3.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+                <a href="../assets/papers/2508.15212v3.pdf" target="_blank" rel="noopener">Local PDF</a>
+                <span class="pipe">|</span>
+                <a href="https://arxiv.org/abs/2508.15212" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            SeerAttention-R: Sparse Attention Adaptation for Long Reasoning
+            </div>
+            <div class="muted">
+            Yizhao Gao, Shuming Guo, Shijie Cao, Yuqing Xia,
+            Yu Cheng, Lei Wang, Lingxiao Ma, Yutao Sun,
+            Tianzhu Ye, Li Dong, Hayden Kwok-Hay So,
+            Yu Hua, Ting Cao, Fan Yang, Mao Yang · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2506.08889v1.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+                <a href="../assets/papers/2506.08889v1.pdf" target="_blank" rel="noopener">Local PDF</a>
+                <span class="pipe">|</span>
+                <a href="https://arxiv.org/abs/2506.08889" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        <div class="cite-item">
+            <div class="cite-title">
+            LazyEviction: Lagged KV Eviction with Attention Pattern Observation for Efficient Long Reasoning
+            </div>
+            <div class="muted">
+            Haoyue Zhang, Hualei Zhang, Xiaosong Ma,
+            Jie Zhang, Song Guo · arXiv · 2025
+            </div>
+            <div class="cite-links">
+            <a href="https://arxiv.org/pdf/2506.15969v3.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+            <span class="pipe">|</span>
+            <a href="../assets/papers/2506.15969v3.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2506.15969" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+    <footer>
+      <p>
+        Last updated: <span class="muted">2026-01-20</span>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
