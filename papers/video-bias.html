@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>From Preferences to Prejudice — Ke Wan</title>
+  <meta name="description" content="From Preferences to Prejudice: The Role of Alignment Tuning in Shaping Social Bias in Video Diffusion Models (arXiv 2025)." />
+
+  <!-- Scholar-friendly citation metadata (one paper per page) -->
+  <meta name="citation_title" content="From Preferences to Prejudice: The Role of Alignment Tuning in Shaping Social Bias in Video Diffusion Models" />
+
+  <!-- Repeat citation_author once per author -->
+  <meta name="citation_author" content="Zefan Cai" />
+  <meta name="citation_author" content="Haoyi Qiu" />
+  <meta name="citation_author" content="Haozhe Zhao" />
+  <meta name="citation_author" content="Ke Wan" />
+  <meta name="citation_author" content="Jiachen Li" />
+  <meta name="citation_author" content="Jiuxiang Gu" />
+  <meta name="citation_author" content="Wen Xiao" />
+  <meta name="citation_author" content="Nanyun Peng" />
+  <meta name="citation_author" content="Junjie Hu" />
+
+  <!-- Submitted on 20 Oct 2025 -->
+  <meta name="citation_publication_date" content="2025/10/20" />
+
+  <!-- Stable PDF -->
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2510.17247.pdf" />
+  <meta name="citation_arxiv_id" content="2510.17247" />
+  <meta name="citation_doi" content="10.48550/arXiv.2510.17247" />
+
+  <meta name="citation_journal_title" content="arXiv" />
+  <meta name="citation_technical_report_institution" content="arXiv">
+  <meta name="citation_technical_report_number" content="2510.17247">
+  <link rel="canonical" href="https://wanke1997.github.io/papers/videobiaseval.html" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#121212;
+      --muted:#5b5b5b;
+      --line:#e6e6e6;
+      --accent:#9a6b2f;
+      --max: 860px;
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 42px 18px 70px;
+    }
+    header{ margin-bottom: 20px; }
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .crumb a{ color: var(--muted); font-size: 14px; }
+    .tag{
+      font-size: 12px;
+      color: #fff;
+      background: var(--accent);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .authors{
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .venue{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
+    hr{
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 22px 0;
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      color: var(--accent);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .links a{ color: var(--accent); font-weight: 650; }
+    .pipe{ color:#c9b39a; }
+    .muted{ color: var(--muted); }
+    .abstract{ margin: 0; font-size: 15px; }
+    .bib{
+      margin-top: 10px;
+      background: #fafafa;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    /* Citing papers */
+    .citing{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      max-width: 92ch;
+    }
+    details{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      background: #fff;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .details-meta{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .cite-item{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      color: var(--fg);
+      font-size: 14px;
+    }
+    .cite-item .cite-title{ font-weight: 700; }
+    .cite-item .cite-links{
+      margin-top: 4px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .cite-item .cite-links a{
+      color: var(--accent);
+      font-weight: 650;
+    }
+
+    footer{ margin-top: 28px; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="topbar">
+        <div class="crumb">
+          <a href="../index.html">← Back to homepage</a>
+        </div>
+        <div class="tag">arXiv 2025</div>
+      </div>
+
+      <h1>From Preferences to Prejudice: The Role of Alignment Tuning in Shaping Social Bias in Video Diffusion Models</h1>
+      <p class="authors">
+        Zefan Cai, Haoyi Qiu, Haozhe Zhao, Ke Wan, Jiachen Li, Jiuxiang Gu, Wen Xiao, Nanyun Peng, Junjie Hu
+      </p>
+      <p class="venue">arXiv:2510.17247 (cs.CL, cs.CV)</p>
+
+      <div class="links" aria-label="Links">
+        <a href="https://arxiv.org/abs/2510.17247" target="_blank" rel="noopener">arXiv</a>
+        <span class="pipe">|</span>
+        <a href="https://arxiv.org/pdf/2510.17247.pdf" target="_blank" rel="noopener">PDF</a>
+        <span class="pipe">|</span>
+        <a href="https://github.com/Zefan-Cai/VideoBiasEval" target="_blank" rel="noopener">Code</a>
+      </div>
+    </header>
+
+    <hr />
+
+    <main class="card">
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">Abstract</h2>
+      <p class="abstract">
+        Recent advances in video diffusion models have significantly enhanced text-to-video generation, particularly through alignment tuning using reward models trained on human preferences. While these methods improve visual quality, they can unintentionally encode and amplify social biases. To systematically trace how such biases evolve throughout the alignment pipeline, we introduce VideoBiasEval, a comprehensive diagnostic framework for evaluating social representation in video generation. Grounded in established social bias taxonomies, VideoBiasEval employs an event-based prompting strategy to disentangle semantic content (actions and contexts) from actor attributes (gender and ethnicity). It further introduces multi-granular metrics to evaluate (1) overall ethnicity bias, (2) gender bias conditioned on ethnicity, (3) distributional shifts in social attributes across model variants, and (4) the temporal persistence of bias within videos. Using this framework, we conduct the first end-to-end analysis connecting biases in human preference datasets, their amplification in reward models, and their propagation through alignment-tuned video diffusion models. Our results reveal that alignment tuning not only strengthens representational biases but also makes them temporally stable, producing smoother yet more stereotyped portrayals. These findings highlight the need for bias-aware evaluation and mitigation throughout the alignment process to ensure fair and socially responsible video generation. 
+      </p>
+
+      <hr />
+
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">BibTeX</h2>
+      <div class="bib">
+        @misc{cai2025preferencesprejudicerolealignment,
+            title={From Preferences to Prejudice: The Role of Alignment Tuning in Shaping Social Bias in Video Diffusion Models}, 
+            author={Zefan Cai and Haoyi Qiu and Haozhe Zhao and Ke Wan and Jiachen Li and Jiuxiang Gu and Wen Xiao and Nanyun Peng and Junjie Hu},
+            year={2025},
+            eprint={2510.17247},
+            archivePrefix={arXiv},
+            primaryClass={cs.CL},
+            url={https://arxiv.org/abs/2510.17247}, 
+        }
+      </div>
+    </main>
+
+    <hr />
+
+    <!-- SECTION: Citing papers (put this first, per your request) -->
+
+    <section class="section" id="citing">
+    <h2>Papers Citing This Work</h2>
+    <p class="muted">
+        Below is a manually curated list of publications that cite this paper. This list may be incomplete due to indexing
+        delays or metadata issues across different sources.
+    </p>
+
+    <div class="citing">
+
+        <div class="paper-block"
+        style="border:1px solid var(--line); border-radius: var(--radius); padding:14px; background:#fff;">
+
+        <!-- ===================== Citing papers ===================== -->
+
+        <div class="cite-item">
+            <div class="cite-title">
+            MMGR: Multi-Modal Generative Reasoning
+            </div>
+            <div class="muted">
+            Zefan Cai, Haoyi Qiu, Tianyi Ma, Haozhe Zhao, Gengze Zhou, Kung-Hsiang Huang, Parisa Kordjamshidi, Minjia Zhang, Wen Xiao, Jiuxiang Gu, Nanyun Peng, Junjie Hu · arXiv · 2025
+            </div>
+            <div class="cite-links">
+                <a href="https://arxiv.org/pdf/2512.14691v2.pdf" target="_blank" rel="noopener">arXiv PDF</a>
+                <span class="pipe">|</span>
+            <a href="../assets/papers/2512.14691v2.pdf" target="_blank" rel="noopener">Local PDF</a>
+            <span class="pipe">|</span>
+            <a href="https://arxiv.org/abs/2512.14691" target="_blank" rel="noopener">arXiv</a>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+    <footer>
+      <p>Last updated: <span class="muted">2026-01-20</span></p>
+    </footer>
+
+  </div>
+</body>
+</html>
