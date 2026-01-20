@@ -1,1 +1,629 @@
-Hello World
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name</title>
+  <meta name="description" content="Research homepage of Your Name." />
+
+  <!-- Optional: Helps Google Scholar recognize paper pages (fill if this page is a paper page; otherwise omit) -->
+  <!--
+  <meta name="citation_title" content="R-KV: Redundancy-aware KV Cache Compression for Reasoning Models" />
+  <meta name="citation_author" content="Zefan Cai" />
+  <meta name="citation_publication_date" content="2025/05/30" />
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2505.24133.pdf" />
+  <meta name="citation_arxiv_id" content="2505.24133" />
+  -->
+  
+  <style>
+    /* Only affect Publications section */
+    #publications .pub{
+      display: block !important;
+    }
+    
+    #publications .thumb{
+      display: none !important;
+    }
+    </style>
+    
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#121212;
+      --muted:#5b5b5b;
+      --line:#e6e6e6;
+      --accent:#9a6b2f; /* warm brown like your screenshot */
+      --max: 1020px;
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; text-decoration:none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 22px 80px;
+    }
+
+    /* Top hero */
+    .hero{
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 36px;
+      align-items: start;
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: 44px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .bio{
+      margin: 0;
+      color: var(--fg);
+      font-size: 16px;
+    }
+    .bio .hl{ color: var(--accent); }
+    .callout{
+      margin: 18px 0 0;
+      font-weight: 650;
+      font-size: 16px;
+    }
+
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+      margin-top: 18px;
+      color: var(--muted);
+      align-items: center;
+    }
+    .links .sep{ color: #b8b8b8; }
+    .link{
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .link:hover{
+      border-color: var(--line);
+      background: #fafafa;
+      text-decoration: none;
+    }
+    .icon{
+      width: 16px; height: 16px; display:inline-block;
+    }
+
+    .portrait{
+      display:flex;
+      justify-content:flex-end;
+    }
+    @media (max-width: 860px){
+      .portrait{ justify-content:flex-start; }
+    }
+    .avatar{
+      width: 240px;
+      aspect-ratio: 1/1;
+      border-radius: 999px;
+      background: #f2f2f2;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: #9b9b9b;
+      font-size: 13px;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    hr{
+      border:0;
+      border-top:1px solid var(--line);
+      margin: 34px 0;
+    }
+
+    h2{
+      margin: 0 0 14px;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+    }
+    .section p{
+      margin: 0 0 12px;
+      color: var(--fg);
+      max-width: 78ch;
+    }
+    .muted{ color: var(--muted); }
+
+    /* Publications / lists */
+    .pub-list{
+      display:flex;
+      flex-direction:column;
+      gap: 26px;
+    }
+    .pub{
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (max-width: 740px){
+      .pub{ grid-template-columns: 1fr; }
+    }
+    .thumb{
+      width: 180px;
+      height: 120px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #fbfbfb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: #a4a4a4;
+      font-size: 12px;
+      overflow:hidden;
+    }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    .title{
+      font-weight: 750;
+      margin: 0 0 4px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .authors{
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .venue{
+      margin: 0 0 10px;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .venue .badge{
+      font-style: normal;
+      color: #ffffff;
+      background: var(--accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .pillrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items: center;
+      color: var(--accent);
+      font-size: 14px;
+    }
+    .pillrow a{
+      color: var(--accent);
+      font-weight: 650;
+    }
+    .pillrow .pipe{ color:#c9b39a; }
+
+    /* Citing papers */
+    .citing{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      max-width: 92ch;
+    }
+    details{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      background: #fff;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .details-meta{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .cite-item{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      color: var(--fg);
+      font-size: 14px;
+    }
+    .cite-item .cite-title{ font-weight: 700; }
+    .cite-item .cite-links{
+      margin-top: 4px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .cite-item .cite-links a{
+      color: var(--accent);
+      font-weight: 650;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 48px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      border: 1px solid var(--line);
+      padding: 1px 6px;
+      border-radius: 6px;
+      background: #fafafa;
+      color: #444;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>Ke Wan</h1>
+        <p class="bio">
+            Hi! I’m a Software Engineer II on the HPC/AI team at Microsoft (Azure Core), where I work on large-scale LLM systems in production cloud environments.
+            
+            My research interests lie in efficient transformer inference and system-aware LLM serving. I focus on memory-efficient inference techniques, particularly KV-cache optimization, to enable scalable and high-throughput deployment without model retraining. My work addresses fundamental bottlenecks in large-scale inference and has been evaluated and adopted by both academic and industrial research.
+            
+            Related open-source implementations have received 1,100+ GitHub stars, demonstrating strong community engagement and practical impact. I apply these research insights to the design of reliable and scalable inference platforms serving high-volume workloads.
+            </p>
+            
+
+        <div class="links" aria-label="Links">
+          <a class="link" href="mailto:kewanucsd@hotmail.com" title="Email">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            Email
+          </a>
+          <span class="sep">|</span>
+
+          <a class="link" href="./CV_KeWan.pdf" title="CV">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 3h7l3 3v15H7V3Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M14 3v4h4" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M9 11h6M9 15h6" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            CV
+          </a>
+          <span class="sep">|</span>
+
+          <a class="link" href="https://scholar.google.com/citations?user=Z9bFEOUAAAAJ&hl=en" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M6.5 12.2V16c0 1.8 2.6 3.2 5.5 3.2S17.5 17.8 17.5 16v-3.8" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            Google Scholar
+          </a>
+          <span class="sep">|</span>
+
+          <a class="link" href="https://github.com/wanke1997" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2.5c-5.52 0-10 4.48-10 10 0 4.41 2.87 8.15 6.84 9.47.5.09.68-.22.68-.48v-1.7c-2.78.6-3.36-1.18-3.36-1.18-.45-1.16-1.1-1.46-1.1-1.46-.9-.61.07-.6.07-.6 1 .07 1.52 1.02 1.52 1.02.89 1.52 2.34 1.08 2.91.83.09-.64.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.02-2.68-.1-.25-.44-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 7.3c.85 0 1.71.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.21 2.4.1 2.65.64.7 1.02 1.59 1.02 2.68 0 3.85-2.35 4.69-4.58 4.94.36.32.68.94.68 1.9v2.81c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.5c0-5.52-4.48-10-10-10Z" fill="currentColor"/>
+            </svg>
+            GitHub
+          </a>
+
+          <span class="sep">|</span>
+
+          <!-- <a class="link" href="https://x.com/" target="_blank" rel="noopener" title="Twitter/X">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            Twitter
+          </a> -->
+        </div>
+      </div>
+
+      <div class="portrait">
+        <div class="avatar" aria-label="Portrait">
+          <!-- Replace with your photo:
+               <img src="./assets/portrait.jpg" alt="Your Name" /> -->
+               <img src="./assets/portrait.jpg" alt="Your Name" />
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- SECTION: Publications  -->
+    <section class="section" id="publications">
+        <h2>Publications</h2>
+      
+        <div class="pub-list">
+      
+          <article class="pub">
+            <p class="title">
+              R-KV: Redundancy-aware KV Cache Compression for Reasoning Models
+            </p>
+            <p class="authors">
+                Zefan Cai, Wen Xiao, Hanshi Sun, Cheng Luo, Yikai Zhang, Ke Wan, Yucheng Li, Yeyang Zhou, Li-Wen Chang, Jiuxiang Gu, Zhen Dong, Anima Anandkumar, Abedelkadir Asi, Junjie Hu
+            </p>
+            <p class="venue">
+              NeurIPS 2025 <span class="badge">Poster</span>
+            </p>
+      
+            <div class="pillrow">
+              <a href="https://openreview.net/pdf?id=2jwAjomEDB" target="_blank" rel="noopener">Paper</a>
+              <span class="pipe">|</span>
+              <a href="https://github.com/Zefan-Cai/R-KV" target="_blank" rel="noopener">Code</a>
+            </div>
+          </article>
+      
+          <article class="pub">
+            <p class="title">From Preferences to Prejudice: The Role of Alignment Tuning in Shaping Social Bias in Video Diffusion Models</p>
+            <p class="authors">Zefan Cai, Haoyi Qiu, Haozhe Zhao, Ke Wan, Jiachen Li, Jiuxiang Gu, Wen Xiao, Nanyun Peng, Junjie Hu</p>
+            <p class="venue">ArXiv 2025</p>
+      
+            <div class="pillrow">
+              <a href="https://arxiv.org/pdf/2510.17247" target="_blank" rel="noopener">Paper</a>
+            </div>
+          </article>
+      
+        </div>
+    </section>  
+    
+    <hr />
+
+    <!-- SECTION: Citing papers (put this first, per your request) -->
+    <!-- SECTION: Citing papers (put this first, per your request) -->
+<section class="section" id="citing">
+    <h2>Papers Citing My Work</h2>
+    <p class="muted">
+      Below is a manually curated list of publications that cite my papers. This list may be incomplete due to indexing
+      delays or metadata issues across different sources.
+    </p>
+  
+    <div class="citing">
+  
+      <!-- Paper block -->
+      <div class="paper-block" style="border:1px solid var(--line); border-radius: var(--radius); padding: 14px 14px; background:#fff;">
+        <div style="font-weight:800; font-size:16px; margin-bottom:8px;">
+          R-KV: Redundancy-aware KV Cache Compression for Reasoning Models
+        </div>
+  
+        <div class="details-meta" style="margin-top:0;">
+          <span class="muted">Primary links:</span>
+          <a href="https://openreview.net/pdf?id=2jwAjomEDB" target="_blank" rel="noopener">Paper</a>
+          <span class="pipe">·</span>
+          <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/120110" target="_blank" rel="noopener">Poster</a>
+          <span class="pipe">·</span>
+          <a href="https://github.com/Zefan-Cai/R-KV" target="_blank" rel="noopener">Code</a>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            Sparse-RL: Breaking the Memory Wall in LLM Reinforcement Learning via Stable Sparse Rollouts
+          </div>
+          <div class="muted">
+            Sijia Luo, Xiaokang Zhang, Yuxuan Hu, Bohan Zhang, Ke Wang, Jinbo Su, Mengshu Sun, Lei Liang, Jing Zhang · arXiv · 2026
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2601.10079v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2601.10079v1" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            SkipKV: Selective Skipping of KV Generation and Storage for Efficient Inference with Large Reasoning Models
+          </div>
+          <div class="muted">
+            Jiayi Tian, Seyedarmin Azizi, Yequan Zhao, Erfan Baghaei Potraghloo, Sean McPherson, Sharath Nittur Sridhar,
+            Zhengyang Wang, Zheng Zhang, Massoud Pedram, Souvik Kundu · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2512.07993v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2512.07993" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            G-KV: Decoding-Time KV Cache Eviction with Global Attention
+          </div>
+          <div class="muted">
+            Mengqi Liao, Lu Wang, Chaoyun Zhang, Zekai Shen, Xiaowei Mao, Si Qin, Qingwei Lin, Saravan Rajmohan,
+            Dongmei Zhang, Huaiyu Wan · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2512.00504v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://www.arxiv.org/abs/2512.00504" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            ThinKV: Thought-Adaptive KV Cache Compression for Efficient Reasoning Models
+          </div>
+          <div class="muted">
+            Akshat Ramachandran, Marina Neseem, Charbel Sakr, Rangharajan Venkatesan, Brucek Khailany,
+            Tushar Krishna · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2510.01290v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2510.01290" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            Cache What Lasts: Token Retention for Memory-Bounded KV Cache in LLMs
+          </div>
+          <div class="muted">
+            Ngoc Bui, Shubham Sharma, Simran Lamba, Saumitra Mishra, Rex Ying · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2512.03324v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2512.03324" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            Sentence-Anchored Gist Compression for Long-Context LLMs
+          </div>
+          <div class="muted">
+            Dmitrii Tarasov, Elizaveta Goncharova, Kuznetsov Andrey · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2511.08128v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2511.08128" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            DELTA: Dynamic Layer-Aware Token Attention for Efficient Long-Context Reasoning
+          </div>
+          <div class="muted">
+            Hossein Entezari Zarch, Lei Gao, Chaoyi Jiang, Murali Annavarm · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2510.09883v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2510.09883" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            On the Existence and Behaviour of Secondary Attention Sinks
+          </div>
+          <div class="muted">
+            Jeffrey T.H. Wong, Cheng Zhang, Louis Mahon, Wayne Luk, Anton Isopoussu, Yiren Zhao · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2512.22213v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://www.arxiv.org/abs/2512.22213" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            SparK: Query-Aware Unstructured Sparsity with Recoverable KV Cache Channel Pruning
+          </div>
+          <div class="muted">
+            Huanxuan Liao, Yixing Xu, Shizhu He, Guanchen Li, Xuanwu Yin, Dong Li, Emad Barsoum,
+            Jun Zhao, Kang Liu · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2508.15212v3.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2508.15212" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            SeerAttention-R: Sparse Attention Adaptation for Long Reasoning
+          </div>
+          <div class="muted">
+            Yizhao Gao, Shuming Guo, Shijie Cao, Yuqing Xia, Yu Cheng, Lei Wang, Lingxiao Ma,
+            Yutao Sun, Tianzhu Ye, Li Dong, Hayden Kwok-Hay So, Yu Hua, Ting Cao,
+            Fan Yang, Mao Yang · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2506.08889v1.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2506.08889" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+        <div class="cite-item">
+          <div class="cite-title">
+            LazyEviction: Lagged KV Eviction with Attention Pattern Observation for Efficient Long Reasoning
+          </div>
+          <div class="muted">
+            Haoyue Zhang, Hualei Zhang, Xiaosong Ma, Jie Zhang, Song Guo · arXiv · 2025
+          </div>
+          <div class="cite-links">
+            <a href="./assets/papers/2506.15969v3.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://arxiv.org/abs/2506.15969" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+  
+      </div>
+  
+      <!-- Another paper block -->
+      <!--
+      <div class="paper-block" style="border:1px solid var(--line); border-radius: var(--radius); padding: 14px 14px; background:#fff;">
+        <div style="font-weight:800; font-size:16px; margin-bottom:8px;">
+          Another Paper Title You Wrote (Year)
+        </div>
+        <div class="details-meta muted">
+          Add your links and citing papers here.
+        </div>
+      </div>
+      -->
+  
+    </div>
+  </section>
+  
+      
+
+    <hr />
+
+    <!-- SECTION: Research -->
+    <!-- <section class="section" id="research">
+      <h2>Research</h2>
+      <p>
+        Future AI systems will require long-term interaction, continual personalization, and scalable inference over large
+        external memory. My work focuses on making model inference faster and cheaper without sacrificing quality—especially
+        through context/KV-cache optimization and system-aware serving.
+      </p>
+      <p class="muted">
+        Topics: KV-cache compression · long-context inference · model serving systems · evaluation & reliability
+      </p>
+    </section> -->
+    <!-- <hr /> -->
+
+    
+
+    <!-- <footer>
+      <p>
+        Tip: keep your citing list updated monthly; avoid “churn” updates. If you want Scholar-friendly metadata,
+        consider adding <span class="kbd">citation_*</span> meta tags on dedicated paper pages (one page per paper).
+      </p>
+    </footer> -->
+  </div>
+</body>
+</html>
