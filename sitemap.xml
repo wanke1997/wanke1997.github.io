@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://wanke1997.github.io/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- CV -->
+  <url>
+    <loc>https://wanke1997.github.io/CV_KeWan.pdf</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- R-KV -->
+  <url>
+    <loc>https://openreview.net/pdf?id=2jwAjomEDB</loc>
+  </url>
+
+  <!-- Your papers -->
+  <url>
+    <loc>https://arxiv.org/abs/2510.17247</loc>
+  </url>
+
+  <!-- Local PDFs (citing papers) -->
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2601.10079v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2512.07993v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2512.00504v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2510.01290v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2512.03324v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2511.08128v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2510.09883v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2512.22213v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2508.15212v3.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2506.08889v1.pdf</loc>
+  </url>
+
+  <url>
+    <loc>https://wanke1997.github.io/assets/papers/2506.15969v3.pdf</loc>
+  </url>
+
+</urlset>
