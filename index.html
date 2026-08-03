@@ -25,6 +25,14 @@
     #publications .thumb{
       display: none !important;
     }
+
+    #publications .pub > p{
+      max-width: none;
+    }
+
+    #publications .pub > p:last-child{
+      margin-bottom: 0;
+    }
     </style>
     
 
@@ -77,10 +85,14 @@
       letter-spacing: -0.02em;
       line-height: 1.05;
     }
-    .bio{
-      margin: 0;
+    .bio {
+      margin: 0 0 1rem;
+      line-height: 1.7;
       color: var(--fg);
       font-size: 16px;
+    }
+    .bio:last-child {
+      margin-bottom: 0;
     }
     .bio .hl{ color: var(--accent); }
     .callout{
@@ -259,12 +271,32 @@
       <div>
         <h1>Ke Wan</h1>
         <p class="bio">
-            Hi! I’m a Software Engineer II on the HPC/AI team at Microsoft (Azure Core), where I work on large-scale LLM systems in production cloud environments.
-            
-            My research interests lie in efficient transformer inference and system-aware LLM serving. I focus on memory-efficient inference techniques, particularly KV-cache optimization, to enable scalable and high-throughput deployment without model retraining. My work addresses fundamental bottlenecks in large-scale inference and has been evaluated and adopted by both academic and industrial research.
-            
-            Related open-source implementations have received 1,100+ GitHub stars, demonstrating strong community engagement and practical impact. I apply these research insights to the design of reliable and scalable inference platforms serving high-volume workloads.
-            </p>
+          Hi! I’m a Software Engineer II on the HPC/AI team at Microsoft Azure Core,
+          where I work on large-scale LLM inference and serving systems in production
+          cloud environments. My research focuses on efficient transformer inference,
+          system-aware LLM serving, and multimodal model evaluation. In particular,
+          I study memory-efficient inference techniques such as KV-cache optimization,
+          with the goal of improving scalability, concurrency, and throughput without
+          requiring model retraining.
+        </p>
+    
+        <p class="bio">
+          A central theme of my work is bridging research ideas with practical systems
+          implementations. My research on KV-cache compression has been integrated and
+          optimized across major inference frameworks, including vLLM and SGLang, and
+          adapted to work with LMCache-based serving workflows. These implementations
+          span algorithm design, GPU-kernel optimization, memory management, scheduling,
+          and distributed inference across tensor and data parallel settings.
+        </p>
+    
+        <p class="bio">
+          My research has received more than 100 citations, and related open-source
+          projects have attracted over 1,200 GitHub stars. I have also completed
+          approximately 45 manuscript reviews for leading journals, including
+          IEEE Transactions on Image Processing and Neural Networks. I am broadly
+          interested in developing reliable, scalable, and empirically grounded methods
+          for evaluating and serving modern generative models.
+        </p>
             
 
         <div class="links" aria-label="Links">
@@ -356,14 +388,16 @@
             <p class="venue">Transactions on Machine Learning Research (TMLR)</p>
           </article>
 
-          <article class="pub"></article>
+          <article class="pub">
             <p class="title">
               <a href="papers/bowel-prep-test.html" rel="noopener">
                 A Multi-Stage Machine Learning Pipeline for Automated Bowel Preparation Scale Assessment in Colonoscopy Videos.
               </a>
             </p>
             <p class="authors">Yiqin He; Qilei Chen; Ke Wan; Alimire Nabijiang; Yu Cao; Benyuan Liu</p>
-            <p class="venue">2025 International Conference on Machine Learning and Applications (ICMLA 2025)</p>
+            <p class="venue">
+              2025 International Conference on Machine Learning and Applications (ICMLA 2025) <span class="badge">Oral</span>
+            </p>
           </article>
       
         </div>
