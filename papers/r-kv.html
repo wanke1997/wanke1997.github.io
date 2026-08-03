@@ -137,6 +137,47 @@
       margin: 0;
       font-size: 15px;
     }
+    .open-source-implementation{
+      margin: 18px 0 0;
+      font-size: 15px;
+    }
+    .impact-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 640px){
+      .impact-grid{ grid-template-columns: 1fr; }
+    }
+    .impact-item{
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      background: #fafafa;
+    }
+    .impact-item strong{
+      display:block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .impact-item p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .impact-links{
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+    .impact-links a{
+      color: var(--accent);
+      font-weight: 650;
+    }
     .bib{
       margin-top: 10px;
       background: #fafafa;
@@ -241,16 +282,61 @@
       </p>
 
       <p class="open-source-implementation">
-        R-KV has been deeply integrated and performance-optimized for both
+        Beyond the research prototype, R-KV has been deeply integrated and
+        performance-optimized for production-grade LLM serving stacks. The open-source
+        implementation includes optimized ports for
         <a href="https://github.com/Zefan-Cai/R-KV/tree/main/vLLM" target="_blank" rel="noopener noreferrer">vLLM</a>
         and
-        <a href="https://github.com/Zefan-Cai/R-KV/tree/main/SGLang" target="_blank" rel="noopener noreferrer">SGLang</a>.
-        The implementations support true physical KV-cache eviction, CUDA-graph decoding,
-        asynchronous and batched scheduling, memory-aware request admission, and tensor parallelism (TP) and
-        data parallelism (DP). Evaluations on 8×H100 GPUs show near-lossless accuracy at a
-        512-token KV budget and strong multi-GPU scaling, while enabling higher concurrency
-        and improved throughput under memory-constrained serving workloads.
+        <a href="https://github.com/Zefan-Cai/R-KV/tree/main/SGLang" target="_blank" rel="noopener noreferrer">SGLang</a>,
+        together with an LMCache-compatible integration example. These implementations
+        translate the algorithm into practical serving-system components spanning GPU
+        kernels, KV-memory management, request scheduling, and distributed inference.
       </p>
+
+      <hr />
+
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">Open-source Impact</h2>
+      <div class="impact-grid">
+        <div class="impact-item">
+          <strong>Production-oriented integrations</strong>
+          <p>
+            Optimized implementations for vLLM and SGLang, plus an LMCache-compatible
+            example for integrating R-KV with external KV-cache management workflows.
+          </p>
+        </div>
+
+        <div class="impact-item">
+          <strong>End-to-end systems optimization</strong>
+          <p>
+            True physical KV eviction, CUDA-graph decoding, fused and batched redundancy
+            scoring, asynchronous scheduling, and compression-aware memory admission.
+          </p>
+        </div>
+
+        <div class="impact-item">
+          <strong>Distributed inference support</strong>
+          <p>
+            Tensor and data parallel execution validated on 8×H100 systems, including
+            consistent cross-rank eviction decisions and near-linear DP scaling.
+          </p>
+        </div>
+
+        <div class="impact-item">
+          <strong>Reproducible evaluation</strong>
+          <p>
+            Public benchmark results and implementation notes cover accuracy, throughput,
+            memory pressure, concurrency, and multi-GPU scaling under realistic serving workloads.
+          </p>
+        </div>
+      </div>
+
+      <div class="impact-links" aria-label="Open-source implementation links">
+        <a href="https://github.com/Zefan-Cai/R-KV" target="_blank" rel="noopener noreferrer">Repository</a>
+        <span class="pipe">|</span>
+        <a href="https://github.com/Zefan-Cai/R-KV/tree/main/vLLM" target="_blank" rel="noopener noreferrer">vLLM implementation</a>
+        <span class="pipe">|</span>
+        <a href="https://github.com/Zefan-Cai/R-KV/tree/main/SGLang" target="_blank" rel="noopener noreferrer">SGLang implementation</a>
+      </div>
 
       <hr />
 
