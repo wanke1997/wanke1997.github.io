@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>From Preferences to Prejudice — Ke Wan</title>
+  <meta name="description" content="Paper" />
+
+  <!-- Scholar-friendly citation metadata (one paper per page) -->
+  <meta name="citation_title" content="A Multi-Stage Machine Learning Pipeline for Automated Bowel Preparation Scale Assessment in Colonoscopy Videos" />
+
+  <!-- Repeat citation_author once per author -->
+  <meta name="citation_author" content="Yiqin He" />
+  <meta name="citation_author" content="Qilei Chen" />
+  <meta name="citation_author" content="Ke Wan" />
+  <meta name="citation_author" content="Alimire Nabijiang" />
+  <meta name="citation_author" content="Yu Cao" />
+  <meta name="citation_author" content="Benyuan Liu" />
+
+  <!-- Submitted on 2025/12/3-->
+  <meta name="citation_publication_date" content="2025/12/3" />
+
+  <!-- Stable PDF -->
+  <link rel="canonical" href="https://wanke1997.github.io/papers/bowel-prep-test.html" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#121212;
+      --muted:#5b5b5b;
+      --line:#e6e6e6;
+      --accent:#9a6b2f;
+      --max: 860px;
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 42px 18px 70px;
+    }
+    header{ margin-bottom: 20px; }
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .crumb a{ color: var(--muted); font-size: 14px; }
+    .tag{
+      font-size: 12px;
+      color: #fff;
+      background: var(--accent);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .authors{
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .venue{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
+    hr{
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 22px 0;
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      color: var(--accent);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .links a{ color: var(--accent); font-weight: 650; }
+    .pipe{ color:#c9b39a; }
+    .muted{ color: var(--muted); }
+    .abstract{ margin: 0; font-size: 15px; }
+    .bib{
+      margin-top: 10px;
+      background: #fafafa;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    /* Citing papers */
+    .citing{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      max-width: 92ch;
+    }
+    details{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      background: #fff;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .details-meta{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .cite-item{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      color: var(--fg);
+      font-size: 14px;
+    }
+    .cite-item .cite-title{ font-weight: 700; }
+    .cite-item .cite-links{
+      margin-top: 4px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .cite-item .cite-links a{
+      color: var(--accent);
+      font-weight: 650;
+    }
+
+    footer{ margin-top: 28px; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="topbar">
+        <div class="crumb">
+          <a href="../index.html">← Back to homepage</a>
+        </div>
+        <div class="tag">2025 International Conference on Machine Learning and Applications (ICMLA)</div>
+      </div>
+
+      <h1>A Multi-Stage Machine Learning Pipeline for Automated Bowel Preparation Scale Assessment in Colonoscopy Videos</h1>
+      <p class="authors">
+        Yiqin He; Qilei Chen; Ke Wan; Alimire Nabijiang; Yu Cao; Benyuan Liu
+      </p>
+      <p class="venue">2025 International Conference on Machine Learning and Applications (ICMLA)</p>
+
+      <div class="links" aria-label="Links">
+        <a href="https://www.researchgate.net/profile/Ke_Wan7/publication/400072778_A_Multi-Stage_Machine_Learning_Pipeline_for_Automated_Bowel_Preparation_Scale_Assessment_in_Colonoscopy_Videos/links/6977080258b9985baa8ac919/A-Multi-Stage-Machine-Learning-Pipeline-for-Automated-Bowel-Preparation-Scale-Assessment-in-Colonoscopy-Videos.pdf" target="_blank" rel="noopener">ResearchGate</a>
+        <span class="pipe">|</span>
+        <a href="https://ieeexplore.ieee.org/abstract/document/11471382" target="_blank" rel="noopener">IEEE Xplore</a>
+        <span class="pipe">|</span>
+        <a href="../assets/paper/A_Multi-Stage_Machine_Learning_Pipeline_for_Automated_Bowel_Preparation_Scale_Assessment_in_Colonoscopy_Videos.pdf" target="_blank" rel="noopener">PDF</a>
+      </div>
+    </header>
+
+    <hr />
+
+    <main class="card">
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">Abstract</h2>
+      <p class="abstract">
+        Accurate assessment of intestinal cleanliness is essential for effective colonoscopy, but manual scoring with the Boston Bowel Preparation Scale (BBPS) remains subjective and labor-intensive. In this study, we propose a novel, fully automated multi-stage pipeline for objective BBPS-based bowel preparation assessment in colonoscopy videos. Our approach utilizes deep image classifiers, enhanced by a hierarchical sequence of binary classification tasks, to assign precise frame-level BBPS scores. From the resulting sequence of scores, we extract statistical and temporal features to train machine learning regression models for video-level BBPS prediction. Extensive experiments demonstrate that our pipeline achieves robust, reproducible, and granular video-level bowel cleanliness assessment, outperforming standard multi-class models at the frame level and offering a scalable tool for large-scale endoscopic quality analysis.
+      </p>
+
+      <hr />
+
+      <h2 style="margin:0 0 10px; font-size:18px; letter-spacing:-0.01em;">BibTeX</h2>
+      <div class="bib">
+        @INPROCEEDINGS{11471382,
+          author={He, Yiqin and Chen, Qilei and Wan, Ke and Nabijiang, Alimire and Cao, Yu and Liu, Benyuan},
+          booktitle={2025 International Conference on Machine Learning and Applications (ICMLA)}, 
+          title={A Multi-Stage Machine Learning Pipeline for Automated Bowel Preparation Scale Assessment in Colonoscopy Videos}, 
+          year={2025},
+          volume={},
+          number={},
+          pages={302-309},
+          keywords={Filtering;Filters;Videos;Computer networks;Storage area networks;Video equipment;Wide area networks;Protocols;Communication systems;HTTP;Image classification;Machine learning;Colonoscopy},
+          doi={10.1109/ICMLA66185.2025.00047}}        
+      </div>
+    </main>
+
+    <hr />
+
+    <footer>
+      <p>Last updated: <span class="muted">2026-08-03</span></p>
+    </footer>
+
+  </div>
+</body>
+</html>
